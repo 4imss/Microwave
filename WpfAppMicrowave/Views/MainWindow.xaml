@@ -1,0 +1,77 @@
+﻿<Window x:Class="WpfAppMicrowave.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:WpfAppMicrowave.ViewModels"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- The datagrid used to display all the cars in the data context. Not needed for now. -->
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="3" Source="{Binding FillingImage}" HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom" Width="125" Height="140" Margin="0,-35,0,35" />
+        </Grid>
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Content="Reset the microwave" Grid.Column="0" HorizontalAlignment="left" VerticalAlignment="Top"
+                    Click="Reset" Height="50" />
+            <TextBlock Name="TBCountDown" Grid.Column="1" Width="200" Height="50" TextAlignment="Center"
+                       Text="Remaining time: 0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="25"
+                       Background="WhiteSmoke" FontFamily="Segoe UI Light" />
+            <Menu Grid.Column="2" Height="50" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <MenuItem Header="Products" Height="50">
+                    <MenuItem Header="Rudy" Click="LoadRudy" />
+                    <MenuItem Header="Eye" Click="LoadEye" />
+                    <MenuItem Header="Gremlin" Click="LoadGremlin" />
+                </MenuItem>
+            </Menu>
+        </Grid>
+        <!-- The 3 buttons bellow use Click to call upon a function in MainWindow.xaml.cs. (Click on the arrowhead next to MainWindow.xaml to find the cs version.-->
+        <Grid Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--Define how many columns are gonna be used in this grid.-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--The 3 buttons bellow change the background color. Grid.Column is used to define which slot in the grid they take. Click is used to call upon the function.-->
+            <Button Content="Close the door" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Click="DoorSwitch" />
+            <Button Content="Cook the product" Grid.Column="1" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" Click="CookingSwitch" />
+        </Grid>
+
+        <!-- Change the background image. -->
+        <Grid.Background>
+            <ImageBrush ImageSource="{Binding GridImage}" />
+        </Grid.Background>
+    </Grid>
+</Window>
